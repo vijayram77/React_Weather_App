@@ -72,7 +72,7 @@ const Main = () => {
               placeholder="Search City By Name"
               className=" text-white  w-full bg-transparent placeholder-zinc-500 py-3 pr-10  outline-none"
             />
-            <RiSearchLine type='submit' className=" cursor-pointer text-[#dcdcdc]" size="24px" />
+            <RiSearchLine onClick={()=> search()} type='submit' className=" cursor-pointer text-[#dcdcdc]" size="24px" />
           </div>
         </form>
       </div>
