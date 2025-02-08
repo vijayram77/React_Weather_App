@@ -163,6 +163,7 @@ const Main = () => {
       </div>
       <div className='flex gap-6   px-[5vw] py-[5vh] flex-wrap'>
         {
+          isLoading == "loaded" &&
           fiveday.map((item, i) => {
 
             return (
