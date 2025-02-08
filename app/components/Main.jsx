@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 const Main = () => {
 
   const [isLoading, setisLoading] = useState('none')
+  const [desc, setdesc] = useState("Please search a city to know the weather details");
   const [userLocation, setUserLocation] = useState(null)
   const apikey = '345db7ac63f60f10297a301d0a908bb1'
   const [City, setCity] = useState("")
@@ -46,12 +47,13 @@ const Main = () => {
       setisLoading(i => 'loaded')
     }
     catch (e) {
-      setisLoading(i => 'none')
+      setisLoading(i => 'none');
       console.log(e);
-      setDate(``)
+      setDate(``);
       setCardcity('');
       setTemp(null);
-      setTempdesc('')
+      setTempdesc('');
+      setdesc("no such city found , please check any spelliing mistakes")
     }
   }
 
@@ -63,7 +65,7 @@ const Main = () => {
           <RiCloudLine size="24px" fill='#fff' />
           <h1 className='text-2xl text-[#fff] font-semibold tracking-tighter'>Weather App</h1>
         </div>
-        <form onSubmit={(e) => {e.preventDefault(); search()}}>
+        <form onSubmit={(e) => { e.preventDefault(); search() }}>
           <div className='relative w-full md:w-[30vw] bg-zinc-800 px-6 rounded-full flex justify-between items-center '>
             <input
               type="text"
@@ -72,7 +74,7 @@ const Main = () => {
               placeholder="Search City By Name"
               className=" text-white  w-full bg-transparent placeholder-zinc-500 py-3 pr-10  outline-none"
             />
-            <RiSearchLine onClick={()=> search()} type='submit' className=" cursor-pointer text-[#dcdcdc]" size="24px" />
+            <RiSearchLine onClick={() => search()} type='submit' className=" cursor-pointer text-[#dcdcdc]" size="24px" />
           </div>
         </form>
       </div>
@@ -80,81 +82,31 @@ const Main = () => {
 
       <div className='px-[4vw]'>
         {
-          isLoading == 'loading' ? <div className='w-full bg-[#101010] border border-zinc-800 rounded-xl p-6 flex flex-col justify-between items-start'>
-            <div className='text-[#dcdcdc] my-1 relative overflow-hidden bg-zinc-900 py-[6px] rounded-full w-1/2 tracking-tighter text-6xl font-semibold '>
-              <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-full'></motion.div>
-            </div>
-            <div className='text-[#dcdcdc] my-1 relative overflow-hidden bg-zinc-900 py-[12px] rounded-lg w-1/2 tracking-tighter text-6xl font-semibold '>
-              <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-lg'></motion.div>
-            </div>
-            <div className='text-[#dcdcdc] my-1 relative overflow-hidden bg-zinc-900 py-[6px] rounded-full w-full tracking-tighter text-6xl font-semibold '>
-              <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-full'></motion.div>
-            </div>
-            <div className='text-[#dcdcdc] my-1 relative overflow-hidden bg-zinc-900 py-[6px] rounded-full w-full tracking-tighter text-6xl font-semibold '>
-              <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-full'></motion.div>
-            </div>
-          </div> : isLoading == 'loaded' ?
-            <div className='w-full bg-[#101010] border border-zinc-800 rounded-xl p-6 flex flex-col justify-between items-start'>
-              <h1 className='text-[#cccccc] tracking-tighter font-medium '>Now</h1>
-              <div className='flex items-start gap-2'>
-                <h1 className='text-[#dcdcdc] tracking-tighter text-6xl font-semibold '>{temp}</h1>
-                <h1 className='text-[#dcdcdc] tracking-tighter text-4xl font-semibold '> °C</h1>
+          isLoading == 'loading' ?
+            <div>
+              <div className='w-full bg-[#101010] border border-zinc-800 rounded-xl p-6 py-12 flex flex-col justify-between items-start' style={{height: '300px'}}>
+                <div className='text-[#dcdcdc] my-1 relative overflow-hidden bg-zinc-900 py-[6px] rounded-full w-1/2 tracking-tighter text-6xl font-semibold '>
+                  <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-full'></motion.div>
+                </div>
+                <div className='text-[#dcdcdc] my-1 relative overflow-hidden bg-zinc-900 py-[12px] rounded-lg w-1/2 tracking-tighter text-6xl font-semibold '>
+                  <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-lg'></motion.div>
+                </div>
+                <div className='text-[#dcdcdc] my-1 relative overflow-hidden bg-zinc-900 py-[6px] rounded-full w-full tracking-tighter text-6xl font-semibold '>
+                  <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-full'></motion.div>
+                </div>
+                <div className='text-[#dcdcdc] my-1 relative overflow-hidden bg-zinc-900 py-[6px] rounded-full w-full tracking-tighter text-6xl font-semibold '>
+                  <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-full'></motion.div>
+                </div>
               </div>
-              <p className='text-[#a09e9e] text-[14px] '>feels like {feels} °C</p>
-              <h1 className='text-[#cccccc] tracking-tighter '>{tempdes}</h1>
-              <div className='flex pr-12 gap-2 pt-4 items-center'>
-                <RiWindyLine size='18px' color='#cccccc' />
-                <p className='text-[#a09e9e] text-[14px] '>Wind Speed : {wind} M/S</p>
-              </div>
-              <div className='border-b-[#555] border-b w-full py-1'></div>
-              <div className='flex pr-12 gap-2 pt-4 items-center'>
-                <RiCalendarLine size='18px' color='#cccccc' />
-                <p className='text-[#a09e9e] text-[14px] '>{carddate}</p>
-              </div>
-              <div className='flex pr-12 gap-2 pt-2 items-center'>
-                <RiMapPin2Line size='18px' color='#cccccc' />
-                <p className='text-[#a09e9e] text-[14px] '>{cardcity}</p>
-              </div>
-            </div> :
-            <h1 className='text-zinc-600 mt-8'>Nothing To Show</h1>
 
-        }
-      </div>
-      <div className='pt-[5vh] px-[5vw]'>
-        {
-          isLoading == "loaded" ?
-            <h1 className='text-2xl  font-semibold text-zinc-200'>5 Day Forecast</h1>
-            : isLoading == "loading" ?
-              <div className='text-[#dcdcdc]  relative overflow-hidden bg-zinc-900 py-[6px] rounded-full w-1/2 tracking-tighter text-6xl font-semibold '>
+              <div className='text-[#dcdcdc] mt-12  relative overflow-hidden bg-zinc-900 py-[6px] rounded-full w-1/2 tracking-tighter text-6xl font-semibold '>
                 <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-full'></motion.div>
               </div>
-              : <></>
-        }
 
-      </div>
-      <div className='flex gap-6   px-[5vw] py-[5vh] flex-wrap'>
-        {
-          fiveday.map((item, i) => {
-
-            return (
-              isLoading == "loaded" ?
-                <div key={i} className='w-fit bg-[#101010] border border-zinc-800 rounded-xl py-6 pl-6 pr-16 flex flex-col justify-between items-start'>
-                  <h1 className='text-[#cccccc] tracking-tighter font-medium py-1 '>{item.dt_txt}</h1>
-                  <div className='flex items-start gap-2'>
-                    <h1 className='text-[#dcdcdc] tracking-tighter text-6xl font-semibold '>{Math.round(item.main.temp - 273)} </h1>
-                    <h1 className='text-[#dcdcdc] tracking-tighter text-4xl font-semibold '> °C</h1>
-                  </div>
-                  <p className='text-[#a09e9e] text-[14px] '>feels like {Math.round(item.main.feels_like - 273)} °C</p>
-                  <h1 className='text-[#cccccc] tracking-tighter '>{item.weather[0].description}</h1>
-                  <div className='flex pr-12 gap-2 pt-4 items-center'>
-                    <RiWindyLine size='18px' color='#cccccc' />
-                    <p className='text-[#a09e9e] text-[14px] '>Wind Speed : {item.wind.speed} M/S</p>
-                  </div>
-
-
-                </div>
-                : isLoading == "loading" ?
-                  <div className='w-[320px] bg-[#101010] border border-zinc-800 rounded-xl p-6 flex flex-col justify-between items-start'>
+              <div className='flex gap-6 py-[5vh] flex-wrap'>
+              {
+                Array.from({ length: 5 }).map((item, i) => (
+                  <div key={i} className='w-[320px] bg-[#101010] border border-zinc-800 rounded-xl p-6 flex flex-col justify-between items-start'>
                     <div className='text-[#dcdcdc] my-1 relative overflow-hidden bg-zinc-900 py-[6px] rounded-full w-1/2 tracking-tighter text-6xl font-semibold '>
                       <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-full'></motion.div>
                     </div>
@@ -167,8 +119,69 @@ const Main = () => {
                     <div className='text-[#dcdcdc] my-1 relative overflow-hidden bg-zinc-900 py-[6px] rounded-full w-full tracking-tighter text-6xl font-semibold '>
                       <motion.div initial={{ left: '0%', width: '10%' }} animate={{ left: '100%', width: '100%' }} transition={{ ease: 'easeInOut', duration: 2, repeat: Infinity }} className='absolute  bg-zinc-700 w-1/4 top-0 left-0 h-full  rounded-full'></motion.div>
                     </div>
-                  </div> :
-                  <></>
+                  </div>
+                ))
+              }
+              </div>
+            </div>
+
+
+            : isLoading == 'loaded' ?
+              <div className='w-full bg-[#101010] border border-zinc-800 rounded-xl p-6 flex flex-col justify-between items-start'>
+                <h1 className='text-[#cccccc] tracking-tighter font-medium '>Now</h1>
+                <div className='flex items-start gap-2'>
+                  <h1 className='text-[#dcdcdc] tracking-tighter text-6xl font-semibold '>{temp}</h1>
+                  <h1 className='text-[#dcdcdc] tracking-tighter text-4xl font-semibold '> °C</h1>
+                </div>
+                <p className='text-zinc-500 text-[14px] '>feels like {feels} °C</p>
+                <h1 className='text-[#cccccc] tracking-tighter '>{tempdes}</h1>
+                <div className='flex pr-12 gap-2 pt-4 items-center'>
+                  <RiWindyLine size='18px' color='#cccccc' />
+                  <p className='text-zinc-500 text-[14px] '>Wind Speed : {wind} M/S</p>
+                </div>
+                <div className='border-b-[#555] border-b w-full py-1'></div>
+                <div className='flex pr-12 gap-2 pt-4 items-center'>
+                  <RiCalendarLine size='18px' color='#cccccc' />
+                  <p className='text-zinc-500 text-[14px] '>{carddate}</p>
+                </div>
+                <div className='flex pr-12 gap-2 pt-2 items-center'>
+                  <RiMapPin2Line size='18px' color='#cccccc' />
+                  <p className='text-[#a09e9e] text-[14px] '>{cardcity}</p>
+                </div>
+              </div> :
+              <h1 className='text-zinc-600 mt-8'>{desc}</h1>
+
+        }
+      </div>
+      <div className='pt-[5vh] px-[5vw]'>
+        {
+          isLoading == "loaded" &&
+          <h1 className='text-2xl  font-semibold text-zinc-200'>5 Day Forecast</h1>
+
+        }
+
+      </div>
+      <div className='flex gap-6   px-[5vw] py-[5vh] flex-wrap'>
+        {
+          fiveday.map((item, i) => {
+
+            return (
+              <div key={i} className='w-fit bg-[#101010] border border-zinc-800 rounded-xl py-6 pl-6 pr-16 flex flex-col justify-between items-start'>
+                <h1 className='text-zinc-600 tracking-tight font-semibold py-1 '>{item.dt_txt}</h1>
+                <div className='flex items-start gap-2'>
+                  <h1 className='text-[#dcdcdc] tracking-tighter text-6xl font-semibold '>{Math.round(item.main.temp - 273)} </h1>
+                  <h1 className='text-[#dcdcdc] tracking-tighter text-4xl font-semibold '> °C</h1>
+                </div>
+                <p className='text-zinc-500 text-[14px] '>feels like {Math.round(item.main.feels_like - 273)} °C</p>
+                <h1 className='text-[#cccccc] tracking-tighter '>{item.weather[0].description}</h1>
+                <div className='flex pr-12 gap-2 pt-4 items-center'>
+                  <RiWindyLine size='18px' color='#cccccc' />
+                  <p className='text-zinc-500 text-[14px] '>Wind Speed : {item.wind.speed} M/S</p>
+                </div>
+
+
+              </div>
+
             )
           })
         }
